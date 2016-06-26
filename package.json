@@ -5,11 +5,18 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Clément Delafargue <clement@delafargue.name>",
   "license": "MIT",
   "dependencies": {
-    "node-static": "^0.7.7"
+    "bluebird": "^3.4.1",
+    "hapi": "^13.4.1",
+    "inert": "^4.0.0",
+    "pg": "^6.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.2"
   }
 }
