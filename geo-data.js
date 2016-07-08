@@ -1,5 +1,5 @@
 const GeoData = module.exports;
-const pool = require('./postgresql');
+const pg = require('./postgresql');
 
 GeoData.transect = [
   {"x":48.64025173323246,"y":-2.02921437077907},
@@ -28,22 +28,6 @@ GeoData.transect = [
 ];
 
 
-GeoData.getTrace = (reply) => {
-  pool.connect(function(err, client, done) {
-    if(err) {
-      console.log(err);
-      reply(err);
-    } else {
-      client.query('SELECT position_id, point, depth, datetime from position order by datetime asc', [], function(err, result) {
-        done();
-
-        if(err) {
-          console.log(err);
-          reply(err);
-        } else {
-          reply(result.rows);
-        }
-      });
-    }
-  });
+GeoData.getTrace = () => {
+  return pg.query('SELECT position_id, point, depth, datetime from position order by datetime asc', [])
 }

@@ -28,7 +28,7 @@ server.register(require('inert'), (err) => {
 
 server.route({
     method: 'GET', path: '/path',
-    handler: (request, reply) => GeoData.getTrace(reply)
+    handler: (request, reply) => reply(GeoData.getTrace())
 });
 
 server.route({

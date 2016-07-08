@@ -32,4 +32,36 @@ pool.on('error', function (err, client) {
   console.error('idle client error', err.message, err.stack)
 })
 
-module.exports = pool;
+const getConnection = (pool) => {
+  const connect = () => {
+    console.log("Getting connection");
+    return Promise.fromNode(cb => {
+        return pool.connect((err, conn, done) => {
+          return cb(err, [conn, done]);
+        });
+    });
+  }
+  return connect()
+    .disposer(([conn, done]) => {
+      done();
+    });
+}
+
+const withConnection = (task) => {
+  return Promise.using(
+    getConnection(pool),
+    ([conn, done]) => {
+      return task(Promise.promisifyAll(conn))
+    }
+  )
+}
+
+const query = (query, params) => {
+  return withConnection(conn => {
+    return conn.queryAsync(query, params);
+  }).then(res => res.rows);
+}
+
+
+module.exports.withConnection = withConnection;
+module.exports.query = query;
