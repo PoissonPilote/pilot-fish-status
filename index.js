@@ -5,31 +5,23 @@ const GeoData = require('./geo-data');
 
 // Create a server with a host and port
 const server = new Hapi.Server();
-server.connection({ 
-    host: 'localhost', 
-    port: process.env.PORT || 8080 
+server.connection({
+    host: 'localhost',
+    port: process.env.PORT || 8080
 });
 
 server.register(require('inert'), (err) => {
-    if (err) {
-        throw err;
-    }
+    if (err) { throw err; }
 
     server.route({
-        method: 'GET',
-        path: '/',
-        handler: function (request, reply) {
-            reply.file('./public/index.html');
-        }
+        method: 'GET', path: '/',
+        handler: (request, reply) => reply.file('./public/index.html')
     });
 
     server.route({
-        method: 'GET',
-        path: '/public/{param*}',
+        method: 'GET', path: '/public/{param*}',
         handler: {
-            directory: {
-                path: 'public'
-            }
+            directory: { path: 'public' }
         }
     });
 });
@@ -40,9 +32,8 @@ server.route({
 });
 
 server.route({
-    method: 'GET',
-    path: '/data',
-    handler: function(request, reply) {
+    method: 'GET', path: '/data',
+    handler: (request, reply) => {
       // ToDo
       reply({});
     }
