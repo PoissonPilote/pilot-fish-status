@@ -1,5 +1,6 @@
 const GeoData = module.exports;
 const pg = require('./postgresql');
+const SQL = require('sql-template');
 
 GeoData.transect = [
   {"x":48.64025173323246,"y":-2.02921437077907},
@@ -29,5 +30,5 @@ GeoData.transect = [
 
 
 GeoData.getTrace = () => {
-  return pg.query('SELECT position_id, point, depth, datetime from position order by datetime asc', [])
+  return pg.query(SQL`SELECT position_id, point, depth, datetime from position order by datetime asc`)
 }

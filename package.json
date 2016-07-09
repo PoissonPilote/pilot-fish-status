@@ -20,7 +20,8 @@
     "morgan": "~1.7.0",
     "pg": "^6.0.1",
     "pug": "^2.0.0-beta3",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "sql-template": "^0.4.0"
   },
   "devDependencies": {
     "nodemon": "^1.9.2"
