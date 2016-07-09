@@ -12,6 +12,7 @@
     "node": ">=6"
   },
   "dependencies": {
+    "basicauth-middleware": "^1.1.0",
     "bluebird": "^3.4.1",
     "body-parser": "~1.15.1",
     "cookie-parser": "~1.4.3",
@@ -21,7 +22,8 @@
     "pg": "^6.0.1",
     "pug": "^2.0.0-beta3",
     "serve-favicon": "~2.3.0",
-    "sql-template": "^0.4.0"
+    "sql-template": "^0.4.0",
+    "uuid": "^2.0.2"
   },
   "devDependencies": {
     "nodemon": "^1.9.2"
