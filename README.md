@@ -9,4 +9,7 @@
 - Compteur de pédale (interpolé)
 - Capteur physiologique
 
-Vu que certaines données seront transmise à la voix par le téléphone sonique, ce serait intéressant d'avoir un système qui interpole le donnée (qui calcul en direct une valeur estimé qu'on affine avec des vraix chiffres une fois par jour.
+Vu que certaines données seront transmises à la voix par le téléphone sonique,
+ce serait intéressant d'avoir un système qui interpole les donnée (qui calcule
+en direct une valeur estimée qu'on affine avec de vrais chiffres une fois par
+jour.
