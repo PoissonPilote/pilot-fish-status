@@ -31,12 +31,12 @@ GeoData.transect = [
 
 
 GeoData.getTrace = () => {
-  return pg.query(SQL`SELECT position_id, point, depth, datetime from position order by datetime asc`)
+  return pg.query(SQL`SELECT position_id, point, depth, boat, datetime from position order by datetime asc`)
 }
 
-GeoData.addPoint = ({x, y, depth}) => {
+GeoData.addPoint = ({x, y, depth, boat}) => {
   return pg.query(
-    SQL`insert into position (position_id, point, depth, datetime) values
-        (${uuid.v4()}, ${'(' + x +',' + y + ')'}::point, ${depth}, now())`
+    SQL`insert into position (position_id, point, depth, boat, datetime) values
+        (${uuid.v4()}, ${'(' + x +',' + y + ')'}::point, ${depth}, ${boat}::boat, now())`
   );
 }
