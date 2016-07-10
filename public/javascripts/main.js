@@ -20,7 +20,9 @@ var fetchJson = function(path) {
 };
 
 fetchJson('/path').then(function(points) {
-  addPolylineToMap(points.map(function(point) { return point.point}), {});
+  for(var boat of Object.keys(points)) {
+    addPolylineToMap(points[boat].map(function(point) { return point.point}), {});
+  }
   // ToDo display depth graph
 });
 
