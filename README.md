@@ -33,8 +33,20 @@ jour.
 
 ```
 curl https://pilot-fish.cleverapps.io/path \
-  --data 'x=49.8&y=-3.8&depth=67' \
+  --data '<data>' \
   --user <user>:<password>
+```
+
+`data` can be either *formUrlEncoded* (default) or *JSON* (in that case, don't
+forget the `Content-Type: application/json` header.
+
+```json
+{
+    "x": 49.3, // Mandatory latitude
+    "y": -2.0, // Mandatory longitude
+    ["depth": 0,] // Optional depth in meters. Overriden with 0 for the boats
+    ["datetime": "2016-07-18T00:00:00Z"] // Optional ISO 8601 datetime (preferably UTC). Default: now()
+}
 ```
 
 ## Contribute

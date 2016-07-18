@@ -37,9 +37,9 @@ GeoData.getTrace = () => {
       res => _.groupBy(res, 'boat'));
 }
 
-GeoData.addPoint = ({x, y, depth, boat}) => {
+GeoData.addPoint = ({x, y, depth, boat, datetime}) => {
   return pg.query(
     SQL`insert into position (position_id, point, depth, boat, datetime) values
-        (${uuid.v4()}, ${'(' + x +',' + y + ')'}::point, ${depth}, ${boat}::boat, now())`
+        (${uuid.v4()}, ${'(' + x +',' + y + ')'}::point, ${depth}, ${boat}::boat, ${datetime})`
   );
 }

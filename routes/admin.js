@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const auth = require('express-authentication');
 const basic = require('express-authentication-basic');
+const moment = require('moment');
 
 const GeoData = require('../src/geo-data');
 
@@ -25,8 +26,10 @@ router.post('/path', auth.required(), (req, res, next) => {
   if(vessel === 'boat-1' || vessel === 'boat-2') depth = 0;
   else depth = odepth;
 
-  if(!isNaN(x) && !isNaN(y) && !isNaN(depth)) {
-    GeoData.addPoint({x, y, depth, boat: auth.of(req).authentication.user})
+  const datetime = moment(req.body.datetime);
+
+  if(!isNaN(x) && !isNaN(y) && !isNaN(depth) && datetime.isValid()) {
+    GeoData.addPoint({x, y, depth, boat: auth.of(req).authentication.user, datetime})
       .then(() => res.sendStatus(201))
       .catch(next)
   } else {
