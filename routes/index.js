@@ -14,7 +14,11 @@ router.get('/api/data', (req, res, next) => {
 });
 
 router.get('/api/transect', (req, res, next) => {
-  res.send(GeoData.transect)
+  res.send({
+    planned: GeoData.planned,
+    limitEast: GeoData.limitEast,
+    limitWest: GeoData.limitWest
+  })
 });
 
 module.exports = router;
