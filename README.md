@@ -1,6 +1,6 @@
-# pilot-fish-status
+# Status API
 
-[http://pilot-fish.cleverapps.io](http://pilot-fish.cleverapps.io)
+[http://www.projetpoissonpilote.com/api](http://www.projetpoissonpilote.com/api)
 
 - Position GPS triangulé
 - Position estimée
@@ -32,7 +32,7 @@ jour.
 ### `POST /path`
 
 ```
-curl https://pilot-fish.cleverapps.io/path \
+curl http://www.projetpoissonpilote.com/api \
   --data '<data>' \
   --user <user>:<password>
 ```
