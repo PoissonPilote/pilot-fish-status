@@ -12,7 +12,7 @@ const checkSignature = (timestamp, token, signature) => {
 }
 
 router.use(busboy({ immediate: true }));
-router.post('/inbound-email', (req, res, next) => {
+router.post('/api/inbound-email', (req, res, next) => {
   if(checkSignature(req.body.timestamp, req.body.token, req.body.signature)) {
     if(req.body['X-Spot-Type'] === 'NEWMOVEMENT') {
       GeoData.addPoint({

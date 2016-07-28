@@ -17,7 +17,7 @@ const basicAuth = basic((creds, cb) => {
 
 router.use(basicAuth);
 
-router.post('/path', auth.required(), (req, res, next) => {
+router.post('/api/path', auth.required(), (req, res, next) => {
   const vessel = auth.of(req).authentication.user;
   const x = parseFloat(req.body.x, 10)
   const y = parseFloat(req.body.y, 10)
@@ -37,7 +37,7 @@ router.post('/path', auth.required(), (req, res, next) => {
   }
 });
 
-router.post('/data', auth.required(), (req, res, next) => {
+router.post('/api/data', auth.required(), (req, res, next) => {
   res.sendStatus(501)
 });
 
