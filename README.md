@@ -32,7 +32,7 @@ jour.
 ### `POST /path`
 
 ```
-curl http://www.projetpoissonpilote.com/api \
+curl http://www.projetpoissonpilote.com/api/path \
   --data '<data>' \
   --user <user>:<password>
 ```
