@@ -16,20 +16,24 @@ jour.
 
 ## API endpoints
 
-### `GET /path`
+### `GET /api/path`
 
 ```json
-[
-  {
-    "position_id":"<uuid>",
-    "point":{"x":<lat>,"y":<lon>},
-    "depth":"<depth (meters)>",
-    "datetime": "<iso8601 date>"
-  }
-]
+{
+  "<boat-id>": [
+    {
+      "position_id":"<uuid>",
+      "point":{"x":<lat>,"y":<lon>},
+      "depth":"<depth (meters)>",
+      "datetime": "<iso8601 date>"
+    }
+  ]
+}
 ```
 
-### `POST /path`
+Where `boat-id` is in `["boat-1", "boat-2", "sub"]`.
+
+### `POST /api/path`
 
 ```
 curl http://www.projetpoissonpilote.com/api/path \
