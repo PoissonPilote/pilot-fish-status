@@ -41,15 +41,8 @@ GeoData.getTrace = () => {
 }
 
 GeoData.addPoint = ({x, y, depth, boat, datetime}) => {
-  const position_id = uuid.v4();
   return pg.query(
     SQL`insert into position (position_id, point, depth, boat, datetime) values
-        (${position_id}, ${'(' + x +',' + y + ')'}::point, ${depth}, ${boat}::boat, ${datetime})`
-  ).then(() => ({
-      position_id,
-      point: {x, y},
-      depth,
-      boat,
-      datetime
-  }));
+        (${uuid.v4()}, ${'(' + x +',' + y + ')'}::point, ${depth}, ${boat}::boat, ${datetime})`
+  );
 }

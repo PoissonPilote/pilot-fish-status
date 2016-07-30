@@ -30,7 +30,7 @@ router.post('/api/path', auth.required(), (req, res, next) => {
 
   if(!isNaN(x) && !isNaN(y) && !isNaN(depth) && datetime.isValid()) {
     GeoData.addPoint({x, y, depth, boat: auth.of(req).authentication.user, datetime})
-    .then(point => res.status(201).send(point))
+      .then(() => res.sendStatus(201))
       .catch(next)
   } else {
     res.sendStatus(400);
