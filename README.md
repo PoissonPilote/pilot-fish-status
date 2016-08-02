@@ -42,6 +42,7 @@ Available structured data:
 - `oxygen`: Percentage of oxygen
 - `paddle`: Paddling count
 - `humor`: Humor of the crew
+- `data`: Any other kind of data in the form `{type=<type>, value=<value>`
 
 ### `POST /api/data`
 
