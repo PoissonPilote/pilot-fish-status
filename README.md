@@ -7,7 +7,8 @@
 - Profondeur
 - Réserve d'oxygène
 - Compteur de pédale (interpolé)
-- Capteur physiologique
+- Humeur de l'équipage
+- Capteur physiologique?
 
 Vu que certaines données seront transmises à la voix par le téléphone sonique,
 ce serait intéressant d'avoir un système qui interpole les donnée (qui calcule
@@ -32,6 +33,15 @@ jour.
 ```
 
 Where `boat-id` is in `["boat-1", "boat-2", "sub"]`.
+
+Available structured data:
+
+- `x`: latitude of the vessel
+- `y`: longitude of the vessel
+- `depth`: depth in meters
+- `oxygen`: Percentage of oxygen
+- `paddle`: Paddling count
+- `humor`: Humor of the crew
 
 ### `POST /api/data`
 
