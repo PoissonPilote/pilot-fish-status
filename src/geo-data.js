@@ -35,14 +35,15 @@ GeoData.limitWest = [
 ]
 
 GeoData.getTrace = () => {
-  return pg.query(SQL`SELECT position_id, point, depth, boat, datetime from position order by datetime asc`)
+  return pg.query(SQL`SELECT position_id, point, depth, boat, datetime from position where point is not null order by datetime asc`)
     .then(
       res => _.groupBy(res, 'boat'));
 }
 
 GeoData.addPoint = ({x, y, depth, boat, datetime}) => {
+  const point = (x && y) ? '(' + x +',' + y + ')' : null;
   return pg.query(
     SQL`insert into position (position_id, point, depth, boat, datetime) values
-        (${uuid.v4()}, ${'(' + x +',' + y + ')'}::point, ${depth}, ${boat}::boat, ${datetime})`
+        (${uuid.v4()}, ${point}::point, ${depth}, ${boat}::boat, ${datetime})`
   );
 }

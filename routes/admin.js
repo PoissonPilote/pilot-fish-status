@@ -4,6 +4,7 @@ const auth = require('express-authentication');
 const basic = require('express-authentication-basic');
 const moment = require('moment');
 
+const Data = require('../src/data');
 const GeoData = require('../src/geo-data');
 
 const basicAuth = basic((creds, cb) => {
@@ -17,28 +18,10 @@ const basicAuth = basic((creds, cb) => {
 
 router.use(basicAuth);
 
-router.post('/api/path', auth.required(), (req, res, next) => {
-  const vessel = auth.of(req).authentication.user;
-  const x = parseFloat(req.body.x, 10)
-  const y = parseFloat(req.body.y, 10)
-
-  const odepth = parseFloat(req.body.depth, 10)
-  if(vessel === 'boat-1' || vessel === 'boat-2') depth = 0;
-  else depth = odepth;
-
-  const datetime = moment(req.body.datetime);
-
-  if(!isNaN(x) && !isNaN(y) && !isNaN(depth) && datetime.isValid()) {
-    GeoData.addPoint({x, y, depth, boat: auth.of(req).authentication.user, datetime})
-      .then(() => res.sendStatus(201))
-      .catch(next)
-  } else {
-    res.sendStatus(400);
-  }
-});
-
 router.post('/api/data', auth.required(), (req, res, next) => {
-  res.sendStatus(501)
+  Data.handleBatch(req.body).then(() => {
+    res.sendStatus(201);
+  });
 });
 
 module.exports = router;
