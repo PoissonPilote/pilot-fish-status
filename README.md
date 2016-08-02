@@ -33,7 +33,7 @@ jour.
 
 Where `boat-id` is in `["boat-1", "boat-2", "sub"]`.
 
-### `POST /api/path`
+### `POST /api/data`
 
 ```
 curl http://www.projetpoissonpilote.com/api/path \
@@ -41,16 +41,20 @@ curl http://www.projetpoissonpilote.com/api/path \
   --user <user>:<password>
 ```
 
-`data` can be either *formUrlEncoded* (default) or *JSON* (in that case, don't
-forget the `Content-Type: application/json` header.
+With the body in JSON:
 
 ```json
-{
-    "x": 49.3, // Mandatory latitude
-    "y": -2.0, // Mandatory longitude
-    ["depth": 0,] // Optional depth in meters. Overriden with 0 for the boats
-    ["datetime": "2016-07-18T00:00:00Z"] // Optional ISO 8601 datetime (preferably UTC). Default: now()
-}
+[{
+    "boat-1": { // Optional, one for each boat
+       "x": 49.3, // Optional
+       "y": -2.0, // Optional
+       "depth": 0, // Optional depth in meters. Overriden with 0 for the boats
+    },
+    "paddle": 0, // Optional number of paddle cycles since the start
+    "oxygen": 45, // Optional percentage of available oxygen in the sub
+    "data": [{"type": "type", "value": <value>}], // Optional unstructured data
+    "datetime": "2016-07-18T00:00:00Z" // Optional ISO 8601 datetime (preferably UTC). Default: now()
+}]
 ```
 
 ## Contribute
