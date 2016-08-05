@@ -31,8 +31,8 @@ Data.cleanupPositions = (element, boat) => {
       y: element[boat + "[y]"],
       depth: element[boat + "[depth]"]
     }
-    return element;
   }
+  return element;
 }
 
 Data.handlePosition = (element, datetime) => (boat) => {
