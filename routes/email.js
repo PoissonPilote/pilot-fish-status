@@ -13,14 +13,19 @@ const checkSignature = (timestamp, token, signature) => {
 
 router.use(busboy({ immediate: true }));
 router.post('/api/inbound-email', (req, res, next) => {
+  console.log("Inbound email");
   if(checkSignature(req.body.timestamp, req.body.token, req.body.signature)) {
+    console.log(req.body['X-Spot-Type']);
     if(req.body['X-Spot-Type'] === 'NEWMOVEMENT') {
       GeoData.addPoint({
         x: req.body['X-Spot-Latitude'],
         y: req.body['X-Spot-Longitude'],
         depth: 0,
         boat: 'sub'
-      }).then(() => res.sendStatus(201));
+      }).then(() => {
+        console.log("Point inserted");
+        res.sendStatus(201)
+      });
     } else {
       res.sendStatus(200);
     }
