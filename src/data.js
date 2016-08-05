@@ -24,7 +24,19 @@ Data.handleBatchElement = (element) => {
   });
 }
 
+Data.cleanupPositions = (element, boat) => {
+  if(element[boat + "[x]"] && element[boat + "[y]"] || element[boat + "[depth]"]) {
+    element[boat] = {
+      x: element[boat + "[x]"],
+      y: element[boat + "[y]"],
+      depth: element[boat + "[depth]"]
+    }
+    return element;
+  }
+}
+
 Data.handlePosition = (element, datetime) => (boat) => {
+  element = Data.cleanupPositions(element, boat);
   if(element[boat]) {
     const {x, y, depth} = element[boat];;
     return GeoData.addPoint({x, y, depth, boat, datetime})
