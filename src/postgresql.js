@@ -34,7 +34,6 @@ pool.on('error', function (err, client) {
 
 const getConnection = (pool) => {
   const connect = () => {
-    console.log("Getting connection");
     return Promise.fromNode(cb => {
         return pool.connect((err, conn, done) => {
           return cb(err, [conn, done]);
