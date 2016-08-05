@@ -44,3 +44,19 @@ Data.handlePosition = (element, datetime) => (boat) => {
     return Promise.resolve({});
   }
 }
+
+Data.getLast = (item) => {
+  if(item === 'paddle' || item === 'oxygen') {
+    return pg.query(`select ${item} from data where ${item} is not null order by datetime limit 1`)
+      .then(r => r[0][item]);
+  } else {
+    return null;
+  }
+}
+
+Data.getLastItems = () => {
+  return Promise.props({
+      paddle: Data.getLast('paddle'),
+      oxygen: Data.getLast('oxygen')
+  });
+}

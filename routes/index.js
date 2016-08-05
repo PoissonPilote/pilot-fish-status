@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const GeoData = require('../src/geo-data');
+const Data = require('../src/data');
 
 router.get('/api/path', (req, res, next) => {
   GeoData.getTrace()
@@ -10,7 +11,9 @@ router.get('/api/path', (req, res, next) => {
 });
 
 router.get('/api/data', (req, res, next) => {
-  // ToDo
+  Data.getLastItems()
+    .then(d => res.send(d))
+    .catch(next)
 });
 
 router.get('/api/transect', (req, res, next) => {
