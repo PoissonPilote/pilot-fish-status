@@ -24,5 +24,11 @@ router.post('/api/data', auth.required(), (req, res, next) => {
   });
 });
 
+router.post('/api/datum', auth.required(), (req, res, next) => {
+  Data.handleBatchElement(req.body).then(() => {
+    res.sendStatus(201);
+  });
+});
+
 module.exports = router;
 
