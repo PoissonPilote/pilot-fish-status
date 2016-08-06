@@ -17,6 +17,8 @@ router.post('/api/inbound-email', (req, res, next) => {
   if(checkSignature(req.body.timestamp, req.body.token, req.body.signature)) {
     console.log(req.body['X-Spot-Type']);
     if(req.body['X-Spot-Type'] === 'NEWMOVEMENT') {
+      console.log(req.body['X-Spot-Latitude']);
+      console.log(req.body['X-Spot-Longitude']);
       GeoData.addPoint({
         x: req.body['X-Spot-Latitude'],
         y: req.body['X-Spot-Longitude'],
@@ -25,7 +27,7 @@ router.post('/api/inbound-email', (req, res, next) => {
       }).then(() => {
         console.log("Point inserted");
         res.sendStatus(201)
-      });
+      }).catch(console.log);
     } else {
       res.sendStatus(200);
     }
