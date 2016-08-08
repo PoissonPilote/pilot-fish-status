@@ -2,6 +2,9 @@ const express = require('express');
 const busboy = require('connect-busboy');
 const router = express.Router();
 const crypto = require('crypto');
+const moment = require('moment');
+
+const GeoData = require("../src/geo-data");
 
 const key = process.env.MAILGUN_API_KEY;
 const checkSignature = (timestamp, token, signature) => {
@@ -17,17 +20,16 @@ router.post('/api/inbound-email', (req, res, next) => {
   if(checkSignature(req.body.timestamp, req.body.token, req.body.signature)) {
     console.log(req.body['X-Spot-Type']);
     if(req.body['X-Spot-Type'] === 'NEWMOVEMENT') {
-      console.log(req.body['X-Spot-Latitude']);
-      console.log(req.body['X-Spot-Longitude']);
       GeoData.addPoint({
         x: req.body['X-Spot-Latitude'],
         y: req.body['X-Spot-Longitude'],
         depth: 0,
-        boat: 'sub'
+        boat: 'sub',
+        datetime: moment(req.body['X-Spot-Time'])
       }).then(() => {
         console.log("Point inserted");
         res.sendStatus(201)
-      }).catch(console.log);
+      }).catch(next);
     } else {
       res.sendStatus(200);
     }
