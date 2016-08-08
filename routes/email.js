@@ -25,7 +25,7 @@ router.post('/api/inbound-email', (req, res, next) => {
         y: req.body['X-Spot-Longitude'],
         depth: 0,
         boat: 'sub',
-        datetime: moment(req.body['X-Spot-Time'])
+        datetime: moment.unix(req.body['X-Spot-Time'])
       }).then(() => {
         console.log("Point inserted");
         res.sendStatus(201)
